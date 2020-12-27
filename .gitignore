@@ -12,3 +12,4 @@
 *.out
 
 pkg/
+cmd/wasataro/wasataro
