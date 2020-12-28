@@ -1,0 +1,32 @@
+name: SmokeTest
+
+on: [push]
+
+jobs:
+  smoke-test:
+    strategy:
+      matrix:
+        go:
+          - 1.15
+
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go }}
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Build
+        run: |
+          make build
+          make install
+
+      - name: Run wasataro on background
+        run: wasataro &
+
+      - run: curl -v localhost:3000
