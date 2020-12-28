@@ -2,6 +2,9 @@ GIT_VER := $(shell git describe --tags)
 DATE := $(shell date +%Y-%m-%dT%H:%M:%S%z)
 export GO111MODULE := on
 
+test:
+	go test -race ./...
+
 build:
 	cd cmd/wasataro && go build -ldflags "-s -w -X main.Version=${GIT_VER} -X main.buildDate=${DATE}" -gcflags="-trimpath=${PWD}"
 
