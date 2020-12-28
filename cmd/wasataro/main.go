@@ -2,19 +2,9 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"net/http"
 
 	"github.com/onigra/wasataro"
 )
-
-// String Add ServeHTTP Function
-type String string
-
-func (s String) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.Method, r.URL)
-	fmt.Fprint(w, s)
-}
 
 func main() {
 	response := flag.String("response", "ok", "response")
@@ -26,6 +16,5 @@ func main() {
 		Port:     *port,
 	}
 
-	http.Handle("/", String(options.Response))
-	http.ListenAndServe(options.PortWithColon(), nil)
+	wasataro.Start(*options)
 }
