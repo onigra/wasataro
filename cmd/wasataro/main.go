@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 // String Add ServeHTTP Function
@@ -15,9 +16,11 @@ func (s String) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	f := flag.String("response", "ok", "response")
+	response := flag.String("response", "ok", "response")
+	port := flag.String("port", "3000", "port")
 	flag.Parse()
 
-	http.Handle("/", String(*f))
-	http.ListenAndServe(":3000", nil)
+	http.Handle("/", String(*response))
+	p := []string{":", *port}
+	http.ListenAndServe(strings.Join(p, ""), nil)
 }
