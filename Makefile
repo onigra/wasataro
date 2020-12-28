@@ -5,7 +5,7 @@ export GO111MODULE := on
 test:
 	go test -race ./...
 
-build:
+build: *.go cmd/wasataro/*.go go.*
 	cd cmd/wasataro && go build -ldflags "-s -w -X main.Version=${GIT_VER} -X main.buildDate=${DATE}" -gcflags="-trimpath=${PWD}"
 
 install: cmd/wasataro/wasataro
