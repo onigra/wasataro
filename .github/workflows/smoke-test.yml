@@ -9,7 +9,7 @@ jobs:
         go:
           - 1.15
 
-    name: Test
+    name: SmokeTest
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
