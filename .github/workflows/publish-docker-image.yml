@@ -1,8 +1,11 @@
 name: Publish Docker image
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - "!**/*"
+    tags:
+      - "v*.*.*"
 
 jobs:
   push-to-registry:
@@ -25,6 +28,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
 
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v2
         with:
@@ -33,3 +40,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/onigra/wasataro:latest
+            ghcr.io/onigra/wasataro:${{ steps.get_version.outputs.VERSION }}
