@@ -33,3 +33,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/onigra/wasataro:latest
+            ghcr.io/onigra/wasataro:${{ github.ref }}
