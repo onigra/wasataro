@@ -11,4 +11,4 @@ RUN make install
 FROM gcr.io/distroless/base
 EXPOSE 3000
 COPY --from=build /go/bin /
-CMD ["/wasataro"]
+ENTRYPOINT ["/wasataro"]
