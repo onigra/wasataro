@@ -1,5 +1,6 @@
 GIT_VER := $(shell git describe --tags)
 DATE := $(shell date +%Y-%m-%dT%H:%M:%S%z)
+CURERNT_BRANCH := $(shell git branch --show-current)
 export GO111MODULE := on
 
 test:
@@ -21,3 +22,9 @@ clean:
 
 release:
 	ghr -prerelease -u onigra -r wasataro -n "$(GIT_VER)" $(GIT_VER) pkg/
+
+docker/build:
+	docker buildx build --tag ghcr.io/onigra/wasataro:$(CURERNT_BRANCH) --file ./Dockerfile .
+
+docker/run:
+	docker run --rm -p 3000:3000 ghcr.io/onigra/wasataro:$(CURERNT_BRANCH); trap 'echo Trapped' 2
