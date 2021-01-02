@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	flag.Usage = wasataro.Usage()
 	response := flag.String("response", "ok", "(Optional) Modify response body.")
 	port := flag.Int("port", 3000, "(Optional) Change listen port.")
 	flag.Parse()
