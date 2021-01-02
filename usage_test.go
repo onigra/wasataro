@@ -25,8 +25,8 @@ func TestUsage(t *testing.T) {
 	expected := `Usage: wasataro [<flags>]
 
 Flags:
-  -response String default: ok
-  -port     Int    default: 3000`
+  -response (Optional) Modify response body. default: ok
+  -port     (Optional) Change listen port.   default: 3000`
 
 	// when
 	f := wasataro.Usage()

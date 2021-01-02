@@ -9,8 +9,8 @@ func usageText() string {
 	return `Usage: wasataro [<flags>]
 
 Flags:
-  -response String default: ok
-  -port     Int    default: 3000`
+  -response (Optional) Modify response body. default: ok
+  -port     (Optional) Change listen port.   default: 3000`
 }
 
 // Usage print usage message
